@@ -18,7 +18,7 @@ def login(request):
         else:
             return redirect("invalid")
 
-    return render(request,"login.html")
+    return render(request,"accounts/login.html")
 
 def signup(request):
     if request.method=="POST":
@@ -52,7 +52,7 @@ def signup(request):
         return redirect("dashboard2")
         
 
-    return render(request,"signup.html")
+    return render(request,"accounts/signup.html")
 def dashboard2(request):
     
     user = request.user
@@ -60,10 +60,10 @@ def dashboard2(request):
     parameters = {
         "user":user
     }
-    return render(request,"dashboard.html",parameters)
+    return render(request,"accounts/dashboard.html",parameters)
 
 def invalid(request):
-    return render(request,"invalid.html")
+    return render(request,"accounts/invalid.html")
 
 
 

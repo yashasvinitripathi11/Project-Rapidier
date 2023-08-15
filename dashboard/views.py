@@ -5,14 +5,14 @@ from django.contrib import auth
 
 
 def whatsnew(request):
-     return render(request,"whatsnew.html")
+     return render(request,"dashboard/whatsnew.html")
 def quiz(request):
-     return render(request,"quiz.html")
+     return render(request,"dashboard/quiz.html")
 def meeting(request):
-     return render(request,"meeting.html")
+     return render(request,"dashboard/meeting.html")
 def exampaper(request):
-     return render(request,"exampaper.html")
+     return render(request,"dashboard/exampaper.html")
 def feedback(request):
-     return render(request,"feedback.html")
+     return render(request,"dashboard/feedback.html")
 def notes(request):
-     return render(request,"notes.html")
+     return render(request,"dashboard/notes.html")

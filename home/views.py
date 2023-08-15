@@ -1,5 +1,5 @@
 from django.shortcuts import render,redirect
 
 def dashboard(request):
-     return render(request,"dashboard.html")
+     return render(request,"home/dashboard.html")
 
