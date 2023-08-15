@@ -1,0 +1,104 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'L_style.css' %}">
+    <title>Document</title>
+    <style>
+        body {
+            background-image: url("{% static 'bg01.png' %}");
+            height: 100vh;
+            background-position: center;
+            background-repeat: no-repeat;
+            margin: 0px;
+            background-color: rgb(189, 178, 189);
+            margin: 0px;
+            padding: 0px;
+        }
+
+        span {
+            /* color: rgb(28, 28, 73); */
+            color: rgb(0, 0, 0);
+            border: 2px solid black;
+            background-color: white;
+            /* opacity: 1; */
+            text-shadow: none;
+            border-radius: 20px 20px  20px ;
+        }
+
+        form {
+            border: 2px solid black;
+            padding: .3rem;
+            width: 35%;
+            margin: auto;
+            background-color: rgb(255, 255, 255);
+            box-shadow: 4px 4px 4px  black;
+        }
+
+        input {
+            width: 98%;
+        }
+
+        button {
+            margin-bottom: 1rem;
+            padding: .3rem;
+            width: 80%;
+        }
+
+        h1 {
+            font-weight: bold;
+            text-align: center;
+            margin-top: 4rem;
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: white;
+            text-shadow: 4px 4px 4px  black;
+            
+        }
+
+        a {
+            text-decoration: none;
+            color: rgb(146, 9, 9);
+        }
+        #h1{
+            /* color: goldenrod; */
+            color: rgb(235, 136, 8);
+            /* opacity: 0; */
+        }
+
+        
+    </style>
+</head>
+
+<body>
+    <div id="bg">
+        <div id="div">
+            
+            <h1 id="h1">Login Here ! </h1>
+            <br><br><br>
+            <form method="POST">
+                 {% csrf_token %}
+                <br>
+                <label for="username">Username:</label>
+                <input name="username" id="username" type="text" pattern="(?=.\d)(?=.[a-z])(?=.*[A-Z]).{8,}" title="must contain atleast one number and one uppercase and lowercase letter, and at least 8 or more characters" required>
+                <br><br>
+
+                <label for="password">Password:</label>
+                <input name="password" id="password" type="password" maxlength="8" required>
+                
+
+                <br><br><br>
+                <center><button type="submit">Login here !</button></center>
+                <center>
+                    <h3>Didn't have an account ?<a href="signup">SignUp</a></h3>
+                </center>
+
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>
