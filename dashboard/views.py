@@ -2,7 +2,8 @@ from django.shortcuts import render,redirect
 from django.contrib.auth.models import User
 from django.contrib import auth
 
-
+def dashboard(request):
+     return render(request, "dashboard/dashboard.html")
 
 def whatsnew(request):
      return render(request,"dashboard/whatsnew.html")
