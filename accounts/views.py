@@ -13,10 +13,10 @@ def signin(request):
         
         if user is not None:
             auth.login(request,user)
-            return redirect("dashboard2")
+            return redirect("dashboard")
         
         else:
-            return redirect("invalid")
+            return redirect("signin")
 
     return render(request,"accounts/signin.html")
 
@@ -50,20 +50,7 @@ def signup(request):
         new_user.save()
 
         return redirect("dashboard2")
-        
-
     return render(request,"accounts/signup.html")
-def dashboard2(request):
-    
-    user = request.user
-
-    parameters = {
-        "user":user
-    }
-    return render(request,"accounts/dashboard.html",parameters)
-
-def invalid(request):
-    return render(request,"accounts/invalid.html")
 
 
 
