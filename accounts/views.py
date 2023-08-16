@@ -4,7 +4,7 @@ from django.contrib import auth
 from .models import Student
 
 
-def login(request):
+def signin(request):
     if request.method=="POST":
         username = request.POST.get("username")
         password = request.POST.get("password")
@@ -18,7 +18,7 @@ def login(request):
         else:
             return redirect("invalid")
 
-    return render(request,"accounts/login.html")
+    return render(request,"accounts/signin.html")
 
 def signup(request):
     if request.method=="POST":
