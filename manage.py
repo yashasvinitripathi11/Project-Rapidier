@@ -2,6 +2,7 @@
 """Django's command-line utility for administrative tasks."""
 import os
 import sys
+from dotenv import load_dotenv
 
 
 def main():
@@ -19,4 +20,9 @@ def main():
 
 
 if __name__ == '__main__':
+    load_dotenv()
+    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "proj.settings")
+
+    from django.core.management import execute_from_command_line
+    execute_from_command_line(sys.argv)
     main()

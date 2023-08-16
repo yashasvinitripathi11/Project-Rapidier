@@ -1,15 +1,16 @@
-from django.db import models
+from django.db import models 
 from django.contrib.auth.models import User
 
 class Student(User):
-
+    
+	
 	gender_choices = (
 		
 		("Male", "Male"),
 		("Female", "Female"),
 		("Prefer not to say", "Prefer not to say")
 	)
-
+    
 	bio = models.CharField(max_length = 100)
 
 	phone_number = models.CharField(max_length = 10)
