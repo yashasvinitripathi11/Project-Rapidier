@@ -11,6 +11,9 @@ urlpatterns = [
      path("exampaper", views.exampaper, name="exampaper"),
      path("feedback", views.feedback, name="feedback"),
      path("notes", views.notes, name="notes"),
+
+     path("test", views.test, name="test"),
+     path("logout",views.logout,name="logout"),
  
  
 ]    

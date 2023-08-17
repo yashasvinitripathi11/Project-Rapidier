@@ -17,3 +17,11 @@ def feedback(request):
      return render(request,"dashboard/feedback.html")
 def notes(request):
      return render(request,"dashboard/notes.html")
+
+def logout(request):
+     auth.logout(request)
+     return redirect("signin")
+
+
+def test(request):
+     return render(request, "dashboard/test.html")
