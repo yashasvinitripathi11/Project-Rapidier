@@ -25,3 +25,5 @@ def logout(request):
 
 def test(request):
      return render(request, "dashboard/test.html")
+def profile(request):
+     return render(request, "dashboard/profile.html")
