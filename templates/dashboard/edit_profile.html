@@ -1,239 +1,122 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit Page</title>
-
-    <style>
-        body {
-            background: #f5f5f5;
-            margin-top: 20px;
-        }
-
-        .ui-w-80 {
-            width: 80px !important;
-            height: auto;
-        }
-
-        .btn-default {
-            border-color: rgba(24, 28, 33, 0.1);
-            background: rgba(0, 0, 0, 0);
-            color: #4E5155;
-        }
-
-        label.btn {
-            margin-bottom: 0;
-        }
-
-        .btn-outline-primary {
-            border-color: #26B4FF;
-            background: transparent;
-            color: #26B4FF;
-        }
-
-        .btn {
-            cursor: pointer;
-        }
-
-        .text-light {
-            color: #babbbc !important;
-        }
-
-        .btn-facebook {
-            border-color: rgba(0, 0, 0, 0);
-            background: #3B5998;
-            color: #fff;
-        }
-
-        .btn-instagram {
-            border-color: rgba(0, 0, 0, 0);
-            background: #000;
-            color: #fff;
-        }
-
-        .card {
-            background-clip: padding-box;
-            box-shadow: 0 1px 4px rgba(24, 28, 33, 0.012);
-        }
-
-        .row-bordered {
-            overflow: hidden;
-        }
-
-        .account-settings-fileinput {
-            position: absolute;
-            visibility: hidden;
-            width: 1px;
-            height: 1px;
-            opacity: 0;
-        }
-
-        .account-settings-links .list-group-item.active {
-            font-weight: bold !important;
-        }
-
-        html:not(.dark-style) .account-settings-links .list-group-item.active {
-            background: transparent !important;
-        }
-
-        .account-settings-multiselect~.select2-container {
-            width: 100% !important;
-        }
-
-        .light-style .account-settings-links .list-group-item {
-            padding: 0.85rem 1.5rem;
-            border-color: rgba(24, 28, 33, 0.03) !important;
-        }
-
-        .light-style .account-settings-links .list-group-item.active {
-            color: #4e5155 !important;
-        }
-
-        .material-style .account-settings-links .list-group-item {
-            padding: 0.85rem 1.5rem;
-            border-color: rgba(24, 28, 33, 0.03) !important;
-        }
-
-        .material-style .account-settings-links .list-group-item.active {
-            color: #4e5155 !important;
-        }
-
-        .dark-style .account-settings-links .list-group-item {
-            padding: 0.85rem 1.5rem;
-            border-color: rgba(255, 255, 255, 0.03) !important;
-        }
-
-        .dark-style .account-settings-links .list-group-item.active {
-            color: #fff !important;
-        }
-
-        .light-style .account-settings-links .list-group-item.active {
-            color: #4E5155 !important;
-        }
-
-        .light-style .account-settings-links .list-group-item {
-            padding: 0.85rem 1.5rem;
-            border-color: rgba(24, 28, 33, 0.03) !important;
-        }
-    </style>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="apple-touch-icon" sizes="76x76" href="{% static 'img/apple-icon.png' %}">
+    <link rel="icon" type="image/png" href="{% static 'img/favicon.png' %}">
+    <title>
+        Argon Dashboard 2 by Creative Tim
+    </title>
+    <!--     Fonts and icons     -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
+    <!-- Nucleo Icons -->
+    <link href="{% static 'css/nucleo-icons.css' %}" rel="stylesheet" />
+    <link href="{% static 'css/nucleo-svg.css' %}" rel="stylesheet" />
+    <!-- Font Awesome Icons -->
+    <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+    <link href="{% static 'css/nucleo-svg.css' %}" rel="stylesheet" />
+    <!-- CSS Files -->
+    <link id="pagestyle" href="{% static 'css/argon-dashboard.css' %}" rel="stylesheet" />
 </head>
 
 <body>
-    <div class="container light-style flex-grow-1 container-p-y">
-
-        <h1 class="font-weight-bold py-3 mb-4">
-            Account settings
-        </h1>
-
-        <div class="card overflow-hidden">
-            <div class="row no-gutters row-bordered row-border-light">
-                <div class="col-md-9">
-                    <div class="tab-content">
-                        <div class="tab-pane fade active show" id="account-general">
-
-                            <div class="card-body media align-items-center">
-                                <img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt=""
-                                    class="d-block ui-w-80">
-                                <div class="media-body ml-4">
-                                    <label class="btn btn-outline-primary">
-                                        Upload new photo
-                                        <input type="file" class="account-settings-fileinput">
-                                    </label> &nbsp;
-                                    <button type="button" class="btn btn-default md-btn-flat">Reset</button>
-
-                                    <div class="text-light small mt-1">Allowed JPG, GIF or PNG. Max size of 800K</div>
-                                </div>
-                            </div>
-                            <hr class="border-light m-0">
-
-                            <div class="card-body">
-                                <div class="form-group">
-                                    <label class="form-label">first_name</label>
-                                    <input type="text" class="form-control mb-1">
-                                </div>
-
-                                <div class="form-group">
-                                    <label class="form-label">last_Name</label>
-                                    <input type="text" class="form-control">
-                                </div>
-
+    <form method="post">
+        {% csrf_token %}
+        <div class="container-fluid py-1">
+            <center>
+                <h1>Edit Your Profile</h1>
+            </center>
+            <div class="card-body">
+                <p class="text-uppercase text-sm">User Information</p>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="example-text-input" class="form-control-label">Username</label>
+                            <input class="form-control" type="text" value="lucky.jesse">
                         </div>
-                        <div class="tab-pane fade" id="account-change-password">
-                            <div class="card-body pb-2">
-
-                                <div class="form-group">
-                                    <label class="form-label">Current password</label>
-                                    <input type="password" class="form-control">
-                                </div>
-
-                                <div class="form-group">
-                                    <label class="form-label">New password</label>
-                                    <input type="password" class="form-control">
-                                </div>
-
-                                <div class="form-group">
-                                    <label class="form-label">Repeat new password</label>
-                                    <input type="password" class="form-control">
-                                </div>
-
-                            </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="example-text-input" class="form-control-label">Email address</label>
+                            <input class="form-control" type="email" value="jesse@example.com">
                         </div>
-                        <div class="tab-pane fade" id="account-info">
-                            <div class="card-body pb-2">
-
-                                <div class="form-group">
-                                    <label class="form-label">Bio</label>
-                                    <textarea class="form-control"
-                                        rows="8" cols="8"></textarea>
-                                </div>
-
-                                <div class="mb-3">
-                                    <label class="small mb-1" for="inputEmailAddress">Email_address</label>
-                                    <input class="form-control" id="inputEmailAddress" type="email"
-                                    placeholder="Enter your email_address">
-                                </div>
-
-                                <div class="form-group">
-                                    <label class="form-label">Phone</label>
-                                    <input type="text" class="form-control" >
-                                </div>
-
-                                <div class="form-group">
-                                    <label class="form-label">parent_Phone</label>
-                                    <input type="text" class="form-control">
-                                </div>
-
-                                <div class="form-group">
-                                    <label class="form-label">address</label>
-                                    <textarea class="form-control" cols="5" rows="6"></textarea> 
-                                  </div>
-                               
-                                <div class="form-group">
-                                    <label class="form-label">gender</label>
-                                    <select class="custom-select">
-                                        <option>female</option>
-                                        <option selected="">male</option>
-                                        <option>prefer not to say</option>
-                                    </select>
-                                </div>
-                            </div>
-                            
-
-                            </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="example-text-input" class="form-control-label">First name</label>
+                            <input class="form-control" type="text" value="Jesse">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="example-text-input" class="form-control-label">Last name</label>
+                            <input class="form-control" type="text" value="Lucky">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="example-text-input" class="form-control-label">Gender</label>
+                            <input class="form-control" type="text" value="Female">
+                        </div>
+                    </div>
+                </div>
+                <hr class="horizontal dark">
+                <p class="text-uppercase text-sm">Contact Information</p>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="example-text-input" class="form-control-label">Phone Number</label>
+                            <input class="form-control" type="text" value="United States">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="example-text-input" class="form-control-label">Parents Phone Number</label>
+                            <input class="form-control" type="text" value="United States">
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="example-text-input" class="form-control-label">Address</label>
+                            <input class="form-control" type="text"
+                                value="Bld Mihail Kogalniceanu, nr. 8 Bl 1, Sc 1, Ap 09">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="example-text-input" class="form-control-label">City</label>
+                            <input class="form-control" type="text" value="New York">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="example-text-input" class="form-control-label">Country</label>
+                            <input class="form-control" type="text" value="United States">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="example-text-input" class="form-control-label">Postal code</label>
+                            <input class="form-control" type="text" value="437300">
+                        </div>
+                    </div>
+                </div>
+                <hr class="horizontal dark">
+                <p class="text-uppercase text-sm">About me</p>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="example-text-input" class="form-control-label">About me</label>
+                            <input class="form-control" type="text"
+                                value="A beautiful Dashboard for Bootstrap 5. It is Free and Open Source.">
                         </div>
                     </div>
                 </div>
             </div>
+            <center><button type="submit">Update profile</button></center>
         </div>
-
-        <div class="text-right mt-3">
-            <button type="button" class="btn btn-primary">update profile</button>&nbsp;
-            <button type="button" class="btn btn-default">Cancel</button>
-        </div>
-
-    </div>
+    </form>
 </body>
-
-</html>

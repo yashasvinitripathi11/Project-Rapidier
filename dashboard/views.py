@@ -27,3 +27,6 @@ def test(request):
      return render(request, "dashboard/test.html")
 def profile(request):
      return render(request, "dashboard/profile.html")
+
+def edit_profile(request):
+     return render(request, "dashboard/edit_profile.html")
