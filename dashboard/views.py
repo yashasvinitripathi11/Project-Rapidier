@@ -54,6 +54,7 @@ def edit_profile(request):
     
         student.profile_pic=request.FILES.get("profile_pic")
         student.save()
+        return redirect("profile")
   
     return render(request,"dashboard/edit_profile.html",{"student":student})
      
