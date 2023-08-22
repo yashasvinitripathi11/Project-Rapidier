@@ -29,7 +29,6 @@ def signup(request):
         password = request.POST.get("password")
 
 
-
         new_user = Student.objects.create(
             username=username,
             first_name=first_name,

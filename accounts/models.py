@@ -19,5 +19,4 @@ class Student(User):
 	address = models.TextField()
 
 	gender = models.CharField(max_length = 17, choices = gender_choices, blank=True,null=True)
-
 	profile_pic = models.ImageField(upload_to = "student_profile", blank=True, null=True,default = "student_profile/default.jpg")

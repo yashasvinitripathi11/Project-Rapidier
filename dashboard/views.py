@@ -1,6 +1,7 @@
 from django.shortcuts import render,redirect
 from django.contrib.auth.models import User
 from django.contrib import auth
+from accounts.models import Student
 
 def dashboard(request):
      return render(request, "dashboard/dashboard.html")
@@ -26,7 +27,33 @@ def logout(request):
 def test(request):
      return render(request, "dashboard/test.html")
 def profile(request):
-     return render(request, "dashboard/profile.html")
+     student = Student.objects.get(id=request.user.id)
+
+     return render(request, "dashboard/profile.html",{"student":student})
 
 def edit_profile(request):
-     return render(request, "dashboard/edit_profile.html")
+     
+    student=Student.objects.get(id=request.user.id)
+    
+    if request.method=="POST":
+        
+        student.first_name=request.POST.get("first_name")
+        
+        student.last_name=request.POST.get("last_name")
+        
+        student.phone_number=request.POST.get("phone_num")
+    
+        student.address=request.POST.get("address")
+    
+        student.parent_phone_number=request.POST.get("parent_phone_num")
+    
+        student.gender=request.POST.get("gender")
+    
+        student.bio=request.POST.get("bio")
+    
+    
+        student.profile_pic=request.FILES.get("profile_pic")
+        student.save()
+  
+    return render(request,"dashboard/profile.html",{"student":student})
+     
