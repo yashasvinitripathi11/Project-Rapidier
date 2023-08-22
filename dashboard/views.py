@@ -41,11 +41,11 @@ def edit_profile(request):
         
         student.last_name=request.POST.get("last_name")
         
-        student.phone_number=request.POST.get("phone_num")
+        student.phone_number=request.POST.get("phone_number")
     
         student.address=request.POST.get("address")
     
-        student.parent_phone_number=request.POST.get("parent_phone_num")
+        student.parent_phone_number=request.POST.get("parent_phone_number")
     
         student.gender=request.POST.get("gender")
     
@@ -55,5 +55,5 @@ def edit_profile(request):
         student.profile_pic=request.FILES.get("profile_pic")
         student.save()
   
-    return render(request,"dashboard/profile.html",{"student":student})
+    return render(request,"dashboard/edit_profile.html",{"student":student})
      
