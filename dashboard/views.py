@@ -15,6 +15,7 @@ def meeting(request):
 def exampaper(request):
      return render(request,"dashboard/exampaper.html")
 def feedback(request):
+     
      return render(request,"dashboard/feedback.html")
 def notes(request):
      return render(request,"dashboard/notes.html")
