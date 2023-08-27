@@ -1,103 +1,62 @@
 {% extends "base.html" %} {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    {% block title %}
-    <title>FEEDBACK PAGE</title>
-    {% endblock %} {% block mycss%}
-    <style>
-      #background {
-        background-image: url("{%  static 'img/feedback.png' %}");
-        background-size: cover;
-        background-repeat: no-repeat;
-        width: 1000px;
-        max-height: 2000px;
-      }
+{% block mytitle %}
+<title>FEEDBACK PAGE</title>
+{% endblock %}
 
-      .feedback-container {
-        background-color: lightblue;
-        border-radius: 20px;
-        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-        padding: 18px;
-        margin: 80px auto;
-        margin-left: 22rem;
-        margin-top: 1px;
-        width: 90%;
-        max-width: 400px;
-        padding-bottom: 80px;
-        height: 40rem;
-      }
-      /*    
-   h1 {
-       text-align: center;
-       margin-bottom: 20px;
-   } */
+{% block feedback_active %} active {% endblock %} {% block body %}
+  {% include 'dashboard/sidebar.html' %}
 
-      form {
-        display: flex;
-        flex-direction: column;
-      }
+  <main class="main-content position-relative border-radius-lg ">
 
-      /* label {
-       font-weight: bold;
-       margin-top: 10px;
-   } */
 
-      /* input, textarea {
-       padding: 10px;
-       margin-top: 5px;
-       border: 1px solid #ccc;
-       border-radius: 5px;
-   } */
 
-      textarea {
-        resize: vertical;
-      }
+    <div class="row">
+      <div class="alert alert-light" role="alert">
+        <strong>We</strong> Love To Hear From You
+      </div>
 
-      /* button {
-       margin-top: 20px;
-       padding: 10px 20px;
-       background-color: #007bff;
-       color: white;
-       border: none;
-       border-radius: 5px;
-       cursor: pointer;
-       transition: background-color 0.3s;
-   } */
 
-      button:hover {
-        background-color: lightcoral;
-      }
-    </style>
+      {% for message in messages %}
+      <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <span class="alert-icon"><i class="ni ni-like-2"></i></span>
+        <span class="alert-text"><strong>Thank</strong> You For Your Valuable Feedback!</span>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      {% endfor %}
 
-    {% endblock %}
-  </head>
+      <div class="container-fluid py-4">
+        <form class="ml-lg-12" method="post">
 
-  {% block feedback_active %} active {% endblock %} {% block body %}
-  <body id="background">
-    <div class="feedback-container">
-      <h1>Feedback</h1>
-      <form method="POST">
-        {% csrf_token %}
-        <label for="name">Name:</label>
-        <input type="text" id="name" name="name" required />
+          {% csrf_token %}
 
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" required />
+          <div class="form-group">
+            <label for="exampleFormControlInput1">Username</label>
+            <input type="email" class="form-control is-valid" id="exampleFormControlInput1"
+              value="{{ student.username }}" disabled>
+          </div>
 
-        <label for="title">Title:</label>
-        <input type="text" id="title" name="title" required />
+          <div class="form-group">
+            <label for="exampleFormControlInput1">Email</label>
+            <input type="email" class="form-control is-valid" id="exampleFormControlInput1" value="{{ student.email }}"
+              disabled>
+          </div>
 
-        <label for="message">Message:</label>
-        <textarea id="message" name="message" rows="4" required></textarea>
 
-        <button type="submit" style="background-color: lightcoral">Send</button>
-      </form>
+          <div class="form-group">
+            <label for="exampleFormControlTextarea1">Your Message</label>
+            <textarea class="form-control" id="exampleFormControlTextarea1" name="message" rows="5" required></textarea>
+          </div>
+
+          <button type="submit" class="btn btn-success btn-lg w-100">Submit</button>
+
+
+        </form>
+      </div>
     </div>
-  </body>
+
+  </main>
 
   {% endblock %}
-</html>

@@ -15,7 +15,7 @@ class Practice_PaperAdmin(admin.ModelAdmin):
 
 @admin.register(Feedback)
 class FeedbackAdmin(admin.ModelAdmin):
-    list_display = ("student", "subject", "date_time")
+    list_display = ("student", "date_time")
 
 
 @admin.register(Session)

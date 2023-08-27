@@ -1,19 +1,8 @@
 from django.db import models
-from accounts.models import Teacher, Student
+from accounts.models import Teacher, Student, Subject
 
-# Create your models here.
-
-
-class Subject(models.Model):
-    name = models.CharField(max_length=20, blank=True, null=True)
-    teacher = models.ForeignKey(
-        Teacher, on_delete=models.CASCADE, blank=True, null=True)
-    description = models.TextField(max_length=50, blank=True, null=True)
-    thumbnail = models.ImageField(
-        upload_to="subject_image", blank=True, null=True)
 
 # ======================================== Practice Paper ========================================
-
 
 class Practice_Paper(models.Model):
     subject = models.ForeignKey(Subject, on_delete=models.CASCADE)
@@ -25,7 +14,6 @@ class Practice_Paper(models.Model):
 
 class Feedback(models.Model):
     student = models.ForeignKey(Student, on_delete=models.CASCADE)
-    subject = models.CharField(max_length=50, blank=True, null=True)
     message = models.TextField()
     date_time = models.DateTimeField(auto_now_add=True)
 

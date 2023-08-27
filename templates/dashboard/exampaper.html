@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% block title %}
+{% block mytitle %}
 <title>EXAMPAPER PAGE</title>
 {% endblock %}
 
@@ -8,5 +8,11 @@ active
 {% endblock %}
 
 {% block body %}
-<h1>find your exam paper here</h1>
+{% include 'dashboard/sidebar.html' %}
+<main class="main-content position-relative border-radius-lg ">
+
+    <h1>Exam page here</h1>
+
+    
+</main>
 {% endblock %}
