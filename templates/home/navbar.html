@@ -1,0 +1,63 @@
+<div class="elementor-widget-container">
+    <link rel="stylesheet"
+        href="../static/plugins/elementor-pro/assets/css/widget-nav-menu.min.css">
+    <nav
+        class="elementor-nav-menu--main elementor-nav-menu__container elementor-nav-menu--layout-horizontal e--pointer-none">
+        <ul id="menu-1-22e0e01" class="elementor-nav-menu">
+            <li
+                class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-35">
+                <a href="{% url 'home' %}" aria-current="page"
+                    class="elementor-item  {% block home_active %} {% endblock %}">Home</a>
+            </li>
+
+            <li
+                class="menu-item menu-item-type-custom menu-item-object-custom menu-item-46">
+                <a href="{% url 'faq' %}"
+                    class="elementor-item {% block faq_active %} {% endblock %}">FAQ</a>
+            </li>
+            <li
+                class="menu-item menu-item-type-custom menu-item-object-custom menu-item-41">
+                <a href="{% url 'contact' %}"
+                    class="elementor-item {% block contact_active %} {% endblock %}">Contact us</a>
+            </li>
+
+            <li
+                class="menu-item menu-item-type-custom menu-item-object-custom menu-item-41">
+                <a href="{% url 'about' %}"
+                    class="elementor-item {% block about_active %} {% endblock %}">About us</a>
+            </li>
+        </ul>
+    </nav>
+    <div class="elementor-menu-toggle" role="button" tabindex="0" aria-label="Menu Toggle"
+        aria-expanded="false">
+        <i aria-hidden="true" role="presentation"
+            class="elementor-menu-toggle__icon--open  ti-menu"></i><i aria-hidden="true"
+            role="presentation" class="elementor-menu-toggle__icon--close  ti-close"></i>
+        <span class="elementor-screen-only">Menu</span>
+    </div>
+    <nav class="elementor-nav-menu--dropdown elementor-nav-menu__container"
+        aria-hidden="true">
+        <ul id="menu-2-22e0e01" class="elementor-nav-menu">
+            <li
+                class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-35">
+                <a href="{% url 'home' %}" aria-current="page"
+                    class="elementor-item" tabindex="-1">Home</a>
+            </li>
+            <li
+                class="menu-item menu-item-type-custom menu-item-object-custom menu-item-46">
+                <a href="{% url 'faq' %}"
+                    class="elementor-item" tabindex="-1">FAQ</a>
+            </li>
+            <li
+                class="menu-item menu-item-type-custom menu-item-object-custom menu-item-41">
+                <a href="{% url 'contact' %}"
+                    class="elementor-item" tabindex="-1">Contact us</a>
+            </li>
+            <li
+                class="menu-item menu-item-type-custom menu-item-object-custom menu-item-41">
+                <a href="{% url 'about' %}"
+                    class="elementor-item" tabindex="-1">About us</a>
+            </li>
+        </ul>
+    </nav>
+</div>

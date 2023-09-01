@@ -44,6 +44,11 @@ def signup(request):
         return redirect("signin")
     return render(request,"accounts/signup.html")
 
+# =================================== logout ============================
+
+def logout(request):
+     auth.logout(request)
+     return redirect("home")
 
 
 
