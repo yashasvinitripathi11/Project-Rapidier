@@ -23,9 +23,13 @@
 </head>
 
 <body class="g-sidenav-show   bg-gray-100">
-  <div class="bg-primary position-absolute w-100 min-height-300 top-0" style="background-image: url('https://raw.githubusercontent.com/creativetimofficial/public-assets/master/argon-dashboard-pro/assets/img/profile-layout-header.jpg'); background-position-y: 50%;">
-  <span class="mask bg-primary opacity-6"></span>></div>
-  <aside class="sidenav bg-white navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-4 "id="sidenav-main">
+  <div class="bg-primary position-absolute w-100 min-height-300 top-0"
+    style="background-image: url('https://raw.githubusercontent.com/creativetimofficial/public-assets/master/argon-dashboard-pro/assets/img/profile-layout-header.jpg'); background-position-y: 50%;">
+    <span class="mask bg-primary opacity-6"></span>>
+  </div>
+  <aside
+    class="sidenav bg-white navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-4 "
+    id="sidenav-main">
     <div class="sidenav-header">
       <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none"
         aria-hidden="true" id="iconSidenav"></i>
@@ -123,19 +127,18 @@
     </div>
   </aside>
   <main class="main-content position-relative border-radius-lg ">
-    <!-- Navbar -->
 
+    <!--============================================ Navbar ================================================-->
 
-    
     <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur"
       data-scroll="false">
       <div class="container-fluid py-1 px-3">
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
-            <li class="breadcrumb-item text-sm"><a class="" href="javascript:;">Pages</a></li>
-            <li class="breadcrumb-item text-sm active" aria-current="page">Dashboard</li>
+            <li class="breadcrumb-item text-sm"><a class="" href="javascript:;">{{ student.username }}</a></li>
+            <li class="breadcrumb-item text-sm active" aria-current="page">Home</li>
           </ol>
-          <h6 class="font-weight-bolder mb-0">Dashboard</h6>
+          <h6 class="font-weight-bolder mb-0">{{ student.first_name}}'s Dashboard</h6>
         </nav>
         <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
 
@@ -171,8 +174,45 @@
       </div>
     </nav>
     <!-- End Navbar -->
+
     <div class="container-fluid py-4">
+
       <div class="row">
+
+        <div class="col-xl-3 col-sm-6">
+          <div class="card">
+            <div class="card-body p-3">
+              <div class="row">
+                <p class="text-sm mb-0 text-uppercase font-weight-bold">Ongoing class</p>
+                {% for current_session in sessions_today %}
+                <div class="col-8">
+                  <div class="numbers">
+                      <h5 class="font-weight-bolder">
+
+                        {{ current_session.title|truncatechars:13 }}
+
+                      </h5>
+                      <p class="mb-0 text-sm">
+                        <span class="text-success text-sm font-weight-normal"></span> By 
+                        {{current_session.teacher.first_name }} {{ current_session.teacher.last_name }}
+                      </p>
+
+                  </div>
+                </div>
+                <div class="col-4 text-end">
+                  <a href="{{ current_session.link }}" target="_blank">
+                    <div class="icon icon-shape bg-gradient-success shadow-warning text-center rounded-circle">
+                      <i class="ni ni-button-play text-lg opacity-10" aria-hidden="true"></i>
+                    </div>
+                  </a>
+                </div>
+
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+        </div>
+
         <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
           <div class="card">
             <div class="card-body p-3">
@@ -180,278 +220,151 @@
                 <div class="col-8">
                   <div class="numbers">
                     <p class="text-sm mb-0 text-uppercase font-weight-bold">
-                      <!-- Today's Money -->
+                      Quiz Attempted
                     </p>
                     <h5 class="font-weight-bolder">
-                      <!-- $53,000 -->
+                      56
                     </h5>
                     <p class="mb-0">
                       <span class="text-success text-sm font-weight-bolder">
-                        <!-- +55% -->
+                        +5%
                       </span>
-                      <!-- since yesterday -->
+                      since last quiz
                     </p>
                   </div>
                 </div>
                 <div class="col-4 text-end">
                   <div class="icon icon-shape bg-gradient-primary shadow-primary text-center rounded-circle">
-                    <i class="ni ni-money-coins text-lg opacity-10" aria-hidden="true"></i>
+                    <i class="ni ni-user-run text-lg opacity-10" aria-hidden="true"></i>
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
+
         <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
-          <div class="card">
+          <div class="card bg-secondary text-white-50">
             <div class="card-body p-3">
               <div class="row">
                 <div class="col-8">
                   <div class="numbers">
                     <p class="text-sm mb-0 text-uppercase font-weight-bold">
-                      <!-- Today's Users -->
+                      Assignments
                     </p>
                     <h5 class="font-weight-bolder">
-                      <!-- 2,300 -->
+                      0
                     </h5>
                     <p class="mb-0">
                       <span class="text-success text-sm font-weight-bolder"></span>
-                      <!-- since last week -->
+                      Coming Soon...
                     </p>
                   </div>
                 </div>
                 <div class="col-4 text-end">
-                  <div class="icon icon-shape bg-gradient-danger shadow-danger text-center rounded-circle">
-                    <i class="ni ni-world text-lg opacity-10" aria-hidden="true"></i>
+                  <div class="icon icon-shape bg-gradient-danger shadow-danger text-center rounded-circle opacity-5">
+                    <i class="ni ni-paper-diploma text-lg opacity-5" aria-hidden="true"></i>
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
+
         <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
-          <div class="card">
+          <div class="card bg-secondary text-white-50">
             <div class="card-body p-3">
               <div class="row">
                 <div class="col-8">
                   <div class="numbers">
                     <p class="text-sm mb-0 text-uppercase font-weight-bold">
-                      <!-- New Clients -->
+                      Current Rank
                     </p>
                     <h5 class="font-weight-bolder">
-                      <!-- +3,462 -->
+                      0
                     </h5>
                     <p class="mb-0">
-                      <span class="text-danger text-sm font-weight-bolder">
-                        <!-- -2% -->
-                      </span>
-                      <!-- since last quarter -->
+                      <!-- <span class="text-success text-sm font-weight-bolder">
+                        +0
+                      </span> -->
+                      <!-- since last week -->
+                      Coming Soon...
                     </p>
                   </div>
                 </div>
                 <div class="col-4 text-end">
-                  <div class="icon icon-shape bg-gradient-success shadow-success text-center rounded-circle">
-                    <i class="ni ni-paper-diploma text-lg opacity-10" aria-hidden="true"></i>
+                  <div class="icon icon-shape bg-gradient-success shadow-success text-center rounded-circle opacity-5">
+                    <i class="ni ni-trophy text-lg opacity-5" aria-hidden="true"></i>
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <div class="col-xl-3 col-sm-6">
-          <div class="card">
-            <div class="card-body p-3">
-              <div class="row">
-                <div class="col-8">
-                  <div class="numbers">
-                    <p class="text-sm mb-0 text-uppercase font-weight-bold">Ongoing class</p>
-                    <h5 class="font-weight-bolder">
-                      Subject
-                    </h5>
-                    <p class="mb-0">
-                      <span class="text-success text-sm font-weight-bolder"></span> Teacher
-                    </p>
-                  </div>
-                </div>
-                <div class="col-4 text-end">
-                  <div class="icon icon-shape bg-gradient-warning shadow-warning text-center rounded-circle">
-                    <i class="ni ni-cart text-lg opacity-10" aria-hidden="true"></i>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+
       </div>
       <!-- Table -->
+
+      <!-- =========================================== today's session ================================ -->
 
       <div class="row" style="margin-top: 0.7%;">
         <div class="col-12">
           <div class="card mb-4">
             <div class="card-header pb-0">
-              <h6>Meeting Table</h6>
+              <h6>Today's Sessions</h6>
             </div>
             <div class="card-body px-0 pt-0 pb-2">
               <div class="table-responsive p-0">
                 <table class="table align-items-center mb-0">
                   <thead>
                     <tr>
-                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Author</th>
-                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Function
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Title</th>
+
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">By
                       </th>
+
                       <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                         Status
                       </th>
+
                       <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                        Employed</th>
-                      <th class=" text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ">Status</th>
-                      
+                        Date</th>
+
+                      <th class=" text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ">Action</th>
+
                     </tr>
                   </thead>
+
                   <tbody>
-                    <tr>
-                      <td>
-                        <div class="d-flex px-2 py-1">
-                          <div class="d-flex flex-column justify-content-center">
-                            <h6 class="mb-0 text-sm">John Michael</h6>
-                            <p class="text-xs text-secondary mb-0">john@creative-tim.com</p>
-                          </div>
-                        </div>
-                      </td>
-                      <td>
-                        <p class="text-xs font-weight-bold mb-0">Manager</p>
-                        <p class="text-xs text-secondary mb-0">Organization</p>
-                      </td>
-                      <td class="align-middle text-center text-sm">
-                        <span class="badge badge-sm bg-gradient-success">Online</span>
-                      </td>
-                      <td class="align-middle text-center">
-                        <span class="text-secondary text-xs font-weight-bold">23/04/18</span>
-                      </td>
-                      <td class="align-middle">
-                        <span class="badge badge-sm bg-gradient-success">Online</span>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <div class="d-flex px-2 py-1">
 
-                          <div class="d-flex flex-column justify-content-center">
-                            <h6 class="mb-0 text-sm">Alexa Liras</h6>
-                            <p class="text-xs text-secondary mb-0">alexa@creative-tim.com</p>
-                          </div>
-                        </div>
-                      </td>
-                      <td>
-                        <p class="text-xs font-weight-bold mb-0">Programator</p>
-                        <p class="text-xs text-secondary mb-0">Developer</p>
-                      </td>
-                      <td class="align-middle text-center text-sm">
-                        <span class="badge badge-sm bg-gradient-secondary">Offline</span>
-                      </td>
-                      <td class="align-middle text-center">
-                        <span class="text-secondary text-xs font-weight-bold">11/01/19</span>
-                      </td>
-                      <td class="align-middle">
-                        <span class="badge badge-sm bg-gradient-secondary">Offline</span>
-                      </td>
-                    </tr>
+                    {% for current_session in sessions_today %}
+
                     <tr>
                       <td>
                         <div class="d-flex px-2 py-1">
-
                           <div class="d-flex flex-column justify-content-center">
-                            <h6 class="mb-0 text-sm">Laurent Perrier</h6>
-                            <p class="text-xs text-secondary mb-0">laurent@creative-tim.com</p>
+                            <h6 class="mb-0 text-sm">{{ current_session.title }}</h6>
+                            <p class="text-xs text-secondary mb-0">{{ current_session.subject }}</p>
                           </div>
                         </div>
                       </td>
                       <td>
-                        <p class="text-xs font-weight-bold mb-0">Executive</p>
-                        <p class="text-xs text-secondary mb-0">Projects</p>
+                        <p class="text-xs font-weight-bold mb-0">{{ current_session.teacher.first_name }}</p>
+                        <p class="text-xs text-secondary mb-0">{{ current_session.teacher.last_name }}</p>
                       </td>
                       <td class="align-middle text-center text-sm">
-                        <span class="badge badge-sm bg-gradient-success">Online</span>
+                        <span class="badge badge-sm bg-gradient-{{ current_session.get_meeting_status.color }}">{{ current_session.get_meeting_status.status }}</span>
                       </td>
                       <td class="align-middle text-center">
-                        <span class="text-secondary text-xs font-weight-bold">19/09/17</span>
+                        <span class="text-secondary text-xs font-weight-bold">{{ current_session.session_time }}</span>
                       </td>
                       <td class="align-middle">
-                        <span class="badge badge-sm bg-gradient-success">Online</span>
+                        <a href="{{ current_session.link }}" target="_blank" class="badge badge-sm bg-gradient-success">Join Now</a>
                       </td>
                     </tr>
-                    <tr>
-                      <td>
-                        <div class="d-flex px-2 py-1">
 
-                          <div class="d-flex flex-column justify-content-center">
-                            <h6 class="mb-0 text-sm">Michael Levi</h6>
-                            <p class="text-xs text-secondary mb-0">michael@creative-tim.com</p>
-                          </div>
-                        </div>
-                      </td>
-                      <td>
-                        <p class="text-xs font-weight-bold mb-0">Programator</p>
-                        <p class="text-xs text-secondary mb-0">Developer</p>
-                      </td>
-                      <td class="align-middle text-center text-sm">
-                        <span class="badge badge-sm bg-gradient-success">Online</span>
-                      </td>
-                      <td class="align-middle text-center">
-                        <span class="text-secondary text-xs font-weight-bold">24/12/08</span>
-                      </td>
-                      <td class="align-middle">
-                        <span class="badge badge-sm bg-gradient-success">Online</span>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <div class="d-flex px-2 py-1">
+                    {% endfor %}
 
-                          <div class="d-flex flex-column justify-content-center">
-                            <h6 class="mb-0 text-sm">Richard Gran</h6>
-                            <p class="text-xs text-secondary mb-0">richard@creative-tim.com</p>
-                          </div>
-                        </div>
-                      </td>
-                      <td>
-                        <p class="text-xs font-weight-bold mb-0">Manager</p>
-                        <p class="text-xs text-secondary mb-0">Executive</p>
-                      </td>
-                      <td class="align-middle text-center text-sm">
-                        <span class="badge badge-sm bg-gradient-secondary">Offline</span>
-                      </td>
-                      <td class="align-middle text-center">
-                        <span class="text-secondary text-xs font-weight-bold">04/10/21</span>
-                      </td>
-                      <td class="align-middle">
-                        <span class="badge badge-sm bg-gradient-secondary">Offline</span>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <div class="d-flex px-2 py-1">
-
-                          <div class="d-flex flex-column justify-content-center">
-                            <h6 class="mb-0 text-sm">Miriam Eric</h6>
-                            <p class="text-xs text-secondary mb-0">miriam@creative-tim.com</p>
-                          </div>
-                        </div>
-                      </td>
-                      <td>
-                        <p class="text-xs font-weight-bold mb-0">Programtor</p>
-                        <p class="text-xs text-secondary mb-0">Developer</p>
-                      </td>
-                      <td class="align-middle text-center text-sm">
-                        <span class="badge badge-sm bg-gradient-secondary">Offline</span>
-                      </td>
-                      <td class="align-middle text-center">
-                        <span class="text-secondary text-xs font-weight-bold">14/09/20</span>
-                      </td>
-                      <td class="align-middle">
-                        <span class="badge badge-sm bg-gradient-secondary">Offline</span>
-                      </td>
-                    </tr>
                   </tbody>
                 </table>
               </div>
@@ -459,6 +372,76 @@
           </div>
         </div>
       </div>
+
+      <!-- =========================================== recorded session ================================ -->
+
+      <div class="row" style="margin-top: 0.7%;">
+        <div class="col-12">
+          <div class="card mb-4">
+            <div class="card-header pb-0">
+              <h6>Recorded Sessions</h6>
+            </div>
+            <div class="card-body px-0 pt-0 pb-2">
+              <div class="table-responsive p-0">
+                <table class="table align-items-center mb-0">
+                  <thead>
+                    <tr>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Title</th>
+
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">By
+                      </th>
+
+                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                        Status
+                      </th>
+
+                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                        Date  
+                      </th>
+
+                      <th class=" text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ">Link</th>
+
+                    </tr>
+                  </thead>
+
+                  <tbody>
+
+                    {% for current_session in completed_sessions %}
+
+                    <tr>
+                      <td>
+                        <div class="d-flex px-2 py-1">
+                          <div class="d-flex flex-column justify-content-center">
+                            <h6 class="mb-0 text-sm">{{ current_session.title }}</h6>
+                            <p class="text-xs text-secondary mb-0">{{ current_session.subject }}</p>
+                          </div>
+                        </div>
+                      </td>
+                      <td>
+                        <p class="text-xs font-weight-bold mb-0">{{ current_session.teacher.first_name }}</p>
+                        <p class="text-xs text-secondary mb-0">{{ current_session.teacher.last_name }}</p>
+                      </td>
+                      <td class="align-middle text-center text-sm">
+                        <span class="badge badge-sm bg-gradient-faded-dark">{{ current_session.get_meeting_status.status }}</span>
+                      </td>
+                      <td class="align-middle text-center">
+                        <span class="text-secondary text-xs font-weight-bold">{{ current_session.session_time }}</span>
+                      </td>
+                      <td class="align-middle">
+                        <a href="{{ current_session.link }}" target="_blank" class="badge badge-sm bg-gradient-faded-primary">View</a>
+                      </td>
+                    </tr>
+
+                    {% endfor %}
+
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <div class="row">
         <div class="col-12">
           <div class="card mb-4">
@@ -504,7 +487,7 @@
                           </div>
                         </div>
                       </td>
-                     
+
                     </tr>
                     <tr>
                       <td>
@@ -532,7 +515,7 @@
                           </div>
                         </div>
                       </td>
-                      
+
                     </tr>
                     <tr>
                       <td>
@@ -560,7 +543,7 @@
                           </div>
                         </div>
                       </td>
-                      
+
                       </td>
                     </tr>
                     <tr>
@@ -589,7 +572,7 @@
                           </div>
                         </div>
                       </td>
-                      
+
                     </tr>
                     <tr>
                       <td>
@@ -617,7 +600,7 @@
                           </div>
                         </div>
                       </td>
-                    
+
                     </tr>
                     <tr>
                       <td>
@@ -645,7 +628,7 @@
                           </div>
                         </div>
                       </td>
-                      
+
                     </tr>
                   </tbody>
                 </table>
@@ -654,8 +637,8 @@
           </div>
         </div>
       </div>
-     
-    
+
+
 
     </div>
   </main>
@@ -765,4 +748,3 @@
 </body>
 
 </html>
-

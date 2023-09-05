@@ -20,7 +20,7 @@ class FeedbackAdmin(admin.ModelAdmin):
 
 @admin.register(Session)
 class SessionAdmin(admin.ModelAdmin):
-    list_display = ("title", "session_time", "is_complete", "created_at")
+    list_display = ("title", "session_time", "is_completed", "created_at")
 
 @admin.register(Notes)
 class NotesAdmin(admin.ModelAdmin):

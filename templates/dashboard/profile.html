@@ -37,10 +37,10 @@
       <div class="container-fluid py-1">
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 ps-2 me-sm-6 me-5">
-            <li class="breadcrumb-item text-sm"><a class="text-white opacity-5" href="javascript:;">Pages</a></li>
-            <li class="breadcrumb-item text-sm text-white active" aria-current="page">Profile</li>
+            <li class="breadcrumb-item text-sm"><a class="text-white opacity-5" href="javascript:;">{{ student.username }}</a></li>
+            <li class="breadcrumb-item text-sm text-white active" aria-current="page">My Profile</li>
           </ol>
-          <h6 class="text-white font-weight-bolder ms-2">Profile</h6>
+          <h6 class="text-white font-weight-bolder ms-2">{{ student.first_name}}'s Profile</h6>
         </nav>
         <div class="collapse navbar-collapse me-md-0 me-sm-4 mt-sm-0 mt-2" id="navbar">
           <div class="ms-md-auto pe-md-3 d-flex align-items-center">
@@ -278,24 +278,28 @@
               <!-- ================= basic details vala ==================== -->
 
               <div class="card-body pt-0">
+
+
                 <div class="row">
                   <div class="col">
                     <div class="d-flex justify-content-center">
                       <div class="d-grid text-center">
-                        <span class="text-lg font-weight-bolder">22</span>
-                        <span class="text-sm opacity-8">Friends</span>
+                        <span class="text-lg font-weight-bolder">5</span>
+                        <span class="text-sm opacity-8">Quizes</span>
                       </div>
                       <div class="d-grid text-center mx-4">
-                        <span class="text-lg font-weight-bolder">10</span>
-                        <span class="text-sm opacity-8">Photos</span>
+                        <span class="text-lg font-weight-bolder">7</span>
+                        <span class="text-sm opacity-8">Assignments</span>
                       </div>
                       <div class="d-grid text-center">
-                        <span class="text-lg font-weight-bolder">89</span>
-                        <span class="text-sm opacity-8">Comments</span>
-                      </div>
+                        <span class="text-lg font-weight-bolder">3</span>
+                        <span class="text-sm opacity-8">Tests</span>
+                      </div>  
                     </div>
                   </div>
                 </div>
+
+
                 <div class="text-center mt-4">
                   <h5>
                     {{ student.first_name }} {{ student.last_name }}<span class="font-weight-light">, 

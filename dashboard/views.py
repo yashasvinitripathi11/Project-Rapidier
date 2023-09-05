@@ -1,14 +1,33 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib import auth
+from django.utils import timezone
 from django.contrib import messages
 
 from accounts.models import Student
+from dashboard.models import Session
 from .models import Feedback
 
 
 def dashboard(request):
-    return render(request, "dashboard/dashboard.html")
+    
+    student = Student.objects.get(id=request.user.id)
+    student_subjects = student.subjects.all()
+    
+    current_time = timezone.localtime(timezone.now())
+    today_start = current_time.replace(hour=0, minute=0, second=0, microsecond=0)
+    today_end = current_time.replace(hour=23, minute=59, second=59, microsecond=999999)
+    sessions_today = Session.objects.filter(subject__in=student_subjects, session_time__range=(today_start, today_end))
+    
+    completed_sessions = Session.objects.filter(subject__in=student_subjects, is_completed=True)
+    
+    parameters = {
+        "student": student,
+        "sessions_today": sessions_today,
+        "completed_sessions": completed_sessions
+    }
+    
+    return render(request, "dashboard/dashboard.html", parameters)
 
 
 def whatsnew(request):
@@ -20,7 +39,18 @@ def quiz(request):
 
 
 def meeting(request):
-    return render(request, "dashboard/meeting.html")
+    
+    student = Student.objects.get(id=request.user.id)
+    student_subjects = student.subjects.all()
+    
+    completed_sessions = Session.objects.filter(subject__in=student_subjects, is_completed=True)
+
+    parameters = {
+        "student": student,
+        "completed_sessions": completed_sessions
+    }
+    
+    return render(request, "dashboard/meeting.html", parameters)
 
 
 def exampaper(request):
