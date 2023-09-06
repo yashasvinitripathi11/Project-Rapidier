@@ -94,3 +94,6 @@ class WhatsNew(models.Model):
     title = models.CharField(max_length=50, blank=True, null=True)
     message = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
+
+
+# ======================================= Assignments =======================================
