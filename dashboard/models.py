@@ -45,7 +45,7 @@ class Session(models.Model):
                 "status": "Upcoming"
             }
 
-        elif self.session_time < now + timezone.timedelta(hours=1):
+        elif self.is_completed:
             return {
                 "color": "faded-dark",
                 "status": "Finished"
