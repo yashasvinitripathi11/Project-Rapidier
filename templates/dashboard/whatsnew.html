@@ -1,7 +1,60 @@
 {% extends "base.html" %}
-{% block title %}
-<title>WHAT'S NEW PAGE</title>
+{% load static %}
+{% block mytitle %}
+<title>My Notifications</title>
 {% endblock %}
+
+{% block quiz_active %}
+active
+{% endblock %}
+
+{% block mycss %}
+{% endblock %}
+
 {% block body %}
-<h1>all new updated information </h1>
+{% include 'dashboard/sidebar.html' %}
+<main class="main-content position-relative border-radius-lg">
+
+  {% for notification in whatsnew %}
+
+{% if notification.is_of_today %}
+
+    <div class="card text-center mb-3" style="border: 1.5px solid rgb(255, 127, 127);">
+      <div class="card-header bg-gradient-light">
+        {{ notification.time_ago }} 
+      </div>
+      <div class="card-body">
+        <h5 class="card-title">{{ notification.title }}</h5>
+        <p class="card-text">
+          {{ notification.message }}
+        </p>
+      </div>
+      <div class="card-footer text-body-secondary  bg-gradient-faded-light-vertical">
+        <i>By {{ notification.teacher.first_name }} {{ notification.teacher.last_name }} </i>
+      </div>
+    </div>
+
+    {% else %}
+
+    <div class="card text-center mb-3" style="border: 1.5px solid rgb(122, 255, 151);">
+      <div class="card-header bg-gradient-light">
+        {{ notification.time_ago }} 
+      </div>
+      <div class="card-body">
+        <h5 class="card-title">{{ notification.title }}</h5>
+        <p class="card-text">
+          {{ notification.message }}
+        </p>
+      </div>
+      <div class="card-footer text-body-secondary  bg-gradient-faded-light-vertical">
+        <i>By {{ notification.teacher.first_name }} {{ notification.teacher.last_name }} </i>
+      </div>
+    </div>
+
+    {% endif %}
+
+  {% endfor %}
+
+    
+</main>
 {% endblock %}

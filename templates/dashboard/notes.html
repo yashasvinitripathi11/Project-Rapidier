@@ -1,10 +1,22 @@
 {% extends "base.html" %}
-{% block title %}
-<title>NOTES PAGE</title>
+{% block mytitle %}
+<title>My Notes</title>
 {% endblock %}
 
 {% block notes_active %}
 active
+{% endblock %}
+
+{% block my_css %}
+<style>
+    @media (max-width: 768px) {
+
+        /* Adjustments for mobile devices */
+        #pdfContainer {
+            height: 300px;
+        }
+    }
+</style>
 {% endblock %}
 
 {% block body %}
@@ -13,7 +25,65 @@ active
 
 <main class="main-content position-relative border-radius-lg">
 
-    <h1>find all the notes here </h1>
+    <div class="container-fluid">
+
+        {% for subject in subjects %}
+
+        <div class="card mb-3" style="border: 1px solid rgb(255, 141, 141);">
+            <div class="card-body">
+                <h3 class="heading">
+                    <span class="fw-semibold">Notes</span>
+                    <span class="fs-4"> | {{ subject.name }} </span>
+                  </h3>
+            </div>
+        </div>
+        <hr style="border: 4px solid rgb(252, 80, 0); margin: 10px; border-radius: 5px;">
+    
+        {% for pdf in subject.notes_set.all %}
+    
+        <div class="card mb-3" id="card-title-2">
+            <div class="card-header">
+                <h5 class="card-title">
+    
+                    <div class="d-inline-flex align-middle mb-n3">
+                        {{ forloop.counter }}. <strong>{{ pdf.title }} ({{ pdf.meeting.title }})</strong>
+                    </div>
+    
+                    <a class="btn btn-outline-primary btn-sm text-blue float-end mx-2" id="viewbtn-{{ pdf.id }}"
+                        onclick="return myf({{ pdf.id }});">
+                        View
+                    </a>
+
+                    <a class="btn btn-outline-primary btn-sm text-blue float-end" href="{{ pdf.file.url }}" download>
+                        Download
+                    </a>
+
+                </h5>
+                <embed id="pdfContainer-{{ pdf.id }}" style="display: none; border-radius: 10px; margin-top: 5%;"
+                    src="{{ pdf.file.url }}" type="application/pdf" width="100%" height="400px" />
+            </div>
+        </div>
+    
+        <script>
+            function myf(pdfId) {
+                var x = document.getElementById("pdfContainer-" + pdfId);
+                var btn = document.getElementById("viewbtn-" + pdfId);
+    
+                if (x.style.display === "none") {
+                    btn.innerHTML = "Close";
+                    x.style.display = "block";
+                    card.style.height = "600px";
+                } else {
+                    btn.innerHTML = "View";
+                    x.style.display = "none";
+                    card.style.height = "auto";
+                }
+            }
+        </script>
+        {% endfor %}
+
+        {% endfor %}
+    </div>
 
 </main>
 {% endblock %}

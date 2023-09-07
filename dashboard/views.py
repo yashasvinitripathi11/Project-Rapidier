@@ -5,7 +5,7 @@ from django.utils import timezone
 from django.contrib import messages
 
 from accounts.models import Student
-from dashboard.models import Session
+from dashboard.models import Session, Assignment, Submission, Notes, Anonymous_Message, WhatsNew
 from .models import Feedback
 
 
@@ -17,26 +17,25 @@ def dashboard(request):
     current_time = timezone.localtime(timezone.now())
     today_start = current_time.replace(hour=0, minute=0, second=0, microsecond=0)
     today_end = current_time.replace(hour=23, minute=59, second=59, microsecond=999999)
-    sessions_today = Session.objects.filter(subject__in=student_subjects, session_time__range=(today_start, today_end))
+    sessions_today = Session.objects.filter(subject__in=student_subjects, session_time__range=(today_start, today_end), is_completed=False)
     
     completed_sessions = Session.objects.filter(subject__in=student_subjects, is_completed=True)
+    
+    incomplete_assignments = Assignment.objects.filter(subject__in=student_subjects, due_date__gte=timezone.now())
+    
+    total_submissions = Submission.objects.filter(student=student).count()
     
     parameters = {
         "student": student,
         "sessions_today": sessions_today,
-        "completed_sessions": completed_sessions
+        "completed_sessions": completed_sessions,
+        "incomplete_assignments": incomplete_assignments,
+        "total_submissions": total_submissions
     }
     
     return render(request, "dashboard/dashboard.html", parameters)
 
-
-def whatsnew(request):
-    return render(request, "dashboard/whatsnew.html")
-
-
-def quiz(request):
-    return render(request, "dashboard/quiz.html")
-
+# ======================================== Meeting ========================================
 
 def meeting(request):
     
@@ -52,13 +51,62 @@ def meeting(request):
     
     return render(request, "dashboard/meeting.html", parameters)
 
+# ======================================== Assignments ====================================
+
+def assignments(request):
+    
+    student = Student.objects.get(id=request.user.id)
+    student_subjects = student.subjects.all()
+    
+    assignments = Assignment.objects.filter(subject__in=student_subjects)
+    print(assignments)
+    
+    parameters = {
+        "student": student,
+        "assignments": assignments
+    }
+    
+    return render(request, "dashboard/assignments.html", parameters)
+
+# ======================================== Notes ========================================
+
+def notes(request):
+    
+    student = Student.objects.get(id=request.user.id)
+    subjects = student.subjects.all()
+    
+    notes = Notes.objects.filter(subject__in=subjects)
+    
+    parameters = {
+        "student": student,
+        "subjects": subjects,
+        "notes": notes
+    }
+    
+    return render(request, "dashboard/notes.html", parameters)
+
+# ======================================== Whats New ======================================
+
+def whatsnew(request):
+    
+    student = Student.objects.get(id=request.user.id)
+    
+    whatsnew = WhatsNew.objects.all()
+    
+    parameters = {
+        "student": student,
+        "whatsnew": whatsnew
+    }
+    return render(request, "dashboard/whatsnew.html", parameters)
+
+
+def quiz(request):
+    return render(request, "dashboard/quiz.html")
+
 
 def exampaper(request):
     return render(request, "dashboard/exampaper.html")
 
-
-def notes(request):
-    return render(request, "dashboard/notes.html")
 
 
 def test(request):
@@ -180,3 +228,34 @@ def feedback(request):
     }
 
     return render(request, 'dashboard/feedback.html', parameters)
+
+
+# ============================================== Submit Assignment ==============================================
+
+def submit_assignment(request, assignment_id):
+    student = Student.objects.get(id=request.user.id)
+    assignment = Assignment.objects.get(id=assignment_id)
+
+    if request.method == 'POST':
+        file = request.FILES.get('file')
+        answer = request.POST.get('answer')
+
+        new_submission = Submission.objects.create(
+            student=student,
+            assignment=assignment,
+            file_submission=file,
+            answer=answer
+        )
+
+        new_submission.save()
+
+        messages.success(request, 'Assignment Submitted Successfully!')
+
+        return redirect('dashboard')
+
+    parameters = {
+        "student": student,
+        "assignment": assignment
+    }
+
+    return render(request, 'dashboard/submit_assignment.html', parameters)

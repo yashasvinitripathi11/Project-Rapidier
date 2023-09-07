@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Subject, Practice_Paper, Feedback, Session, Notes, Anonymous_Message, WhatsNew
+from .models import Subject, Practice_Paper, Feedback, Session, Notes, Anonymous_Message, WhatsNew, Assignment, Submission
 # Register your models here.
 
 
@@ -33,3 +33,11 @@ class Anonymous_MessageAdmin(admin.ModelAdmin):
 @admin.register(WhatsNew)
 class WhatsNewAdmin(admin.ModelAdmin):
     list_display = ("title", "teacher", "created_at")
+    
+@admin.register(Assignment)
+class AssignmentAdmin(admin.ModelAdmin):
+    list_display = ("teacher", "title", "due_date", "created_at")
+    
+@admin.register(Submission)
+class SubmissionAdmin(admin.ModelAdmin):
+    list_display = ("assignment", "student", "submitted_at")

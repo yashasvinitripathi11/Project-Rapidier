@@ -133,3 +133,5 @@ MESSAGE_TAGS = {
     messages.WARNING: 'alert-warning',
     messages.ERROR: 'alert-danger',
 }
+
+X_FRAME_OPTIONS = 'SAMEORIGIN'
