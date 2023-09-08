@@ -30,7 +30,8 @@ def dashboard(request):
         "sessions_today": sessions_today,
         "completed_sessions": completed_sessions,
         "incomplete_assignments": incomplete_assignments,
-        "total_submissions": total_submissions
+        "total_submissions": total_submissions,
+
     }
     
     return render(request, "dashboard/dashboard.html", parameters)
@@ -46,7 +47,9 @@ def meeting(request):
 
     parameters = {
         "student": student,
-        "completed_sessions": completed_sessions
+        "completed_sessions": completed_sessions,
+        'has_notification': WhatsNew.has_notification(),
+
     }
     
     return render(request, "dashboard/meeting.html", parameters)
@@ -91,11 +94,14 @@ def whatsnew(request):
     
     student = Student.objects.get(id=request.user.id)
     
-    whatsnew = WhatsNew.objects.all()
+    whatsnew = WhatsNew.objects.all()[::-1]
+    
     
     parameters = {
         "student": student,
-        "whatsnew": whatsnew
+        "whatsnew": whatsnew,
+        'has_notification': WhatsNew.has_notification(),
+
     }
     return render(request, "dashboard/whatsnew.html", parameters)
 

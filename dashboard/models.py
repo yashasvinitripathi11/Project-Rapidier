@@ -98,7 +98,12 @@ class WhatsNew(models.Model):
     def is_of_today(self):
         return self.created_at.date() == timezone.now().date()
     
-    # return how much time ago the object was created
+    # check if there is any notification of today
+    
+    @classmethod
+    def has_notification(cls):
+        return cls.objects.filter(created_at__date=timezone.now().date()).exists()
+    
     
     def time_ago(self):
         now = timezone.now()
