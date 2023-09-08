@@ -23,8 +23,9 @@
 </head>
 
 <body class="g-sidenav-show bg-gray-100">
-  <div class="position-absolute w-100 min-height-300 top-0"
-    style="background-image: url('{{ student.banner_image.url }}'); background-position-y: 50%;">
+  <div class="position-absolute w-100 min-height-100 top-0">
+    <img src="{{ student.banner_image.url }}" alt="" style="background-position-y: 50%; width: inherit; height: 20rem;
+    ">
     <span class="mask bg-primary opacity-3"></span>
   </div>
 
@@ -37,7 +38,8 @@
       <div class="container-fluid py-1">
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 ps-2 me-sm-6 me-5">
-            <li class="breadcrumb-item text-sm"><a class="text-white opacity-5" href="javascript:;">{{ student.username }}</a></li>
+            <li class="breadcrumb-item text-sm"><a class="text-white opacity-5" href="javascript:;">{{ student.username
+                }}</a></li>
             <li class="breadcrumb-item text-sm text-white active" aria-current="page">My Profile</li>
           </ol>
           <h6 class="text-white font-weight-bolder ms-2">{{ student.first_name}}'s Profile</h6>
@@ -284,17 +286,18 @@
                   <div class="col">
                     <div class="d-flex justify-content-center">
                       <div class="d-grid text-center">
-                        <span class="text-lg font-weight-bolder">5</span>
+                        <span class="text-lg font-weight-bolder">-</span>
                         <span class="text-sm opacity-8">Quizes</span>
                       </div>
                       <div class="d-grid text-center mx-4">
-                        <span class="text-lg font-weight-bolder">7</span>
+                        <span class="text-lg font-weight-bolder">
+                          {{ total_submissions }}</span>
                         <span class="text-sm opacity-8">Assignments</span>
                       </div>
                       <div class="d-grid text-center">
-                        <span class="text-lg font-weight-bolder">3</span>
+                        <span class="text-lg font-weight-bolder">-</span>
                         <span class="text-sm opacity-8">Tests</span>
-                      </div>  
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -302,19 +305,19 @@
 
                 <div class="text-center mt-4">
                   <h5>
-                    {{ student.first_name }} {{ student.last_name }}<span class="font-weight-light">, 
-                     <small> {{ student.gender }}</small> </span>
+                    {{ student.first_name }} {{ student.last_name }}<span class="font-weight-light">,
+                      <small> {{ student.gender }}</small> </span>
                   </h5>
                   <div class="h6 font-weight-300">
                     <i class="ni location_pin mr-2"></i>
-                    {% if student.country %}{{student.country}}{% else %} NA {% endif %}, 
+                    {% if student.country %}{{student.country}}{% else %} NA {% endif %},
                     {% if student.city %}{{student.city}}{% else %} NA {% endif %}
                   </div>
                   <div class="h6 mt-4">
                     <i class="ni business_briefcase-24 mr-2"></i>
-                    
+
                     - {% for subject in student.subjects.all %}
-                    {{ subject.name }} - 
+                    {{ subject.name }} -
                     {% endfor %}
                     <br>
                     Enthusiast
@@ -380,7 +383,8 @@
                 onclick="return edit_profile_pic();">Change Profile
                 Picture</button>
               <br>
-              <button class="btn btn-sm btn-outline-secondary float-right mb-0 d-none d-lg-block" onclick="return edit_banner_image();">Change Banner
+              <button class="btn btn-sm btn-outline-secondary float-right mb-0 d-none d-lg-block"
+                onclick="return edit_banner_image();">Change Banner
                 Image</button>
 
               <br>
@@ -429,7 +433,8 @@
                 {% csrf_token %}
                 <label for="select_profile_pic">Select Banner Image</label>
                 <input type="file" id="select_profile_pic"
-                  class="btn btn-sm btn-outline-primary float-right mb-0 d-none d-lg-block" name="banner_image" required>
+                  class="btn btn-sm btn-outline-primary float-right mb-0 d-none d-lg-block" name="banner_image"
+                  required>
                 <br>
 
                 <div class="d-flex justify-content-between">
@@ -441,111 +446,137 @@
 
 
               </form>
+            </div>
 
           </div>
+
+          <button type="button" class="btn btn-sm btn-danger mt-3 w-100 d-lg-block" data-bs-toggle="modal"
+            data-bs-target="#exampleModal">
+            Stop Learning (Delete Account)
+          </button>
+
+          <!-- Modal -->
+          <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h1 class="modal-title fs-5" id="exampleModalLabel">Firse Soch Le!</h1>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  Do You Really Want To Delete Your Account?
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  <a href="{% url 'delete_account' %}" class="btn btn-danger">Yes</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
         </div>
+
       </div>
-
     </div>
-  </div>
 
-  <!--   Core JS Files   -->
-  <script src="js/core/popper.min.js"></script>
-  <script src="js/core/bootstrap.min.js"></script>
-  <script src="{% static 'js/core/bootstrap.min.js' %}"></script>
-  <script src="js/plugins/perfect-scrollbar.min.js"></script>
-  <script src="js/plugins/smooth-scrollbar.min.js"></script>
-  <script>
-    var win = navigator.platform.indexOf('Win') > -1;
-    if (win && document.querySelector('#sidenav-scrollbar')) {
-      var options = {
-        damping: '0.5'
+    <!--   Core JS Files   -->
+    <script src="js/core/popper.min.js"></script>
+    <script src="js/core/bootstrap.min.js"></script>
+    <script src="{% static 'js/core/bootstrap.min.js' %}"></script>
+    <script src="js/plugins/perfect-scrollbar.min.js"></script>
+    <script src="js/plugins/smooth-scrollbar.min.js"></script>
+    <script>
+      var win = navigator.platform.indexOf('Win') > -1;
+      if (win && document.querySelector('#sidenav-scrollbar')) {
+        var options = {
+          damping: '0.5'
+        }
+        Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
       }
-      Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
-    }
-  </script>
+    </script>
 
-  <script>
-    function change_password() {
-      document.getElementById("main_card").style.display = "none";
-      console.log("none vala done");
+    <script>
+      function change_password() {
+        document.getElementById("main_card").style.display = "none";
+        console.log("none vala done");
 
-      document.getElementById("change_password_form").style.display = "block";
+        document.getElementById("change_password_form").style.display = "block";
 
-      console.log("block vala done");
-    }
+        console.log("block vala done");
+      }
 
-    function cancel_change_password() {
-      document.getElementById("main_card").style.display = "block";
-      console.log("block vala done");
+      function cancel_change_password() {
+        document.getElementById("main_card").style.display = "block";
+        console.log("block vala done");
 
-      document.getElementById("change_password_form").style.display = "none";
+        document.getElementById("change_password_form").style.display = "none";
 
-      console.log("none vala done");
-    }
+        console.log("none vala done");
+      }
 
-    function change_profile() {
-      document.getElementById("main_card").style.display = "none";
-      console.log("none vala done");
+      function change_profile() {
+        document.getElementById("main_card").style.display = "none";
+        console.log("none vala done");
 
-      document.getElementById("change_profile_form").style.display = "block";
+        document.getElementById("change_profile_form").style.display = "block";
 
-      console.log("block vala done");
-    }
+        console.log("block vala done");
+      }
 
-    function cancel_edit_profile() {
-      document.getElementById("main_card").style.display = "block";
-      console.log("block vala done");
+      function cancel_edit_profile() {
+        document.getElementById("main_card").style.display = "block";
+        console.log("block vala done");
 
-      document.getElementById("change_profile_form").style.display = "none";
+        document.getElementById("change_profile_form").style.display = "none";
 
-      console.log("none vala done");
-    }
+        console.log("none vala done");
+      }
 
-    function edit_profile_pic() {
+      function edit_profile_pic() {
 
-      // close the change profile form and open the edit profile form
+        // close the change profile form and open the edit profile form
 
-      document.getElementById("change_profile_form").style.display = "none";
-      console.log("none vala done");
+        document.getElementById("change_profile_form").style.display = "none";
+        console.log("none vala done");
 
-      document.getElementById("edit_profile_form").style.display = "block";
-      console.log("block vala done");
+        document.getElementById("edit_profile_form").style.display = "block";
+        console.log("block vala done");
 
-    }
+      }
 
-    function edit_banner_image() {
+      function edit_banner_image() {
 
-      // close the change profile form and open the edit profile form
+        // close the change profile form and open the edit profile form
 
-      document.getElementById("change_profile_form").style.display = "none";
-      console.log("none vala done");
+        document.getElementById("change_profile_form").style.display = "none";
+        console.log("none vala done");
 
-      document.getElementById("edit_banner_form").style.display = "block";
-      console.log("block vala done");
+        document.getElementById("edit_banner_form").style.display = "block";
+        console.log("block vala done");
 
-    }
+      }
 
-    function cancel_edit_profile() {
+      function cancel_edit_profile() {
 
-      // close everything
+        // close everything
 
-      document.getElementById("change_profile_form").style.display = "none";
-      console.log("none vala done");
-      
-      document.getElementById("edit_profile_form").style.display = "none";
-      console.log("none vala done");
+        document.getElementById("change_profile_form").style.display = "none";
+        console.log("none vala done");
 
-      document.getElementById("edit_banner_form").style.display = "none";
-      document.getElementById("main_card").style.display = "block";
+        document.getElementById("edit_profile_form").style.display = "none";
+        console.log("none vala done");
+
+        document.getElementById("edit_banner_form").style.display = "none";
+        document.getElementById("main_card").style.display = "block";
 
 
-    }
-  </script>
-  <!-- Github buttons -->
-  <script async defer src="https://buttons.github.io/buttons.js"></script>
-  <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
-  <script src="js/argon-dashboard.min.js"></script>
+      }
+    </script>
+    <!-- Github buttons -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
+    <script src="js/argon-dashboard.min.js"></script>
 </body>
 
 </html>

@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
 from django.contrib import auth
 from django.utils import timezone
 from django.contrib import messages
@@ -8,7 +9,7 @@ from accounts.models import Student
 from dashboard.models import Session, Assignment, Submission, Notes, Anonymous_Message, WhatsNew
 from .models import Feedback
 
-
+@login_required(login_url='signin')
 def dashboard(request):
     
     student = Student.objects.get(id=request.user.id)
@@ -38,6 +39,7 @@ def dashboard(request):
 
 # ======================================== Meeting ========================================
 
+@login_required(login_url='signin')
 def meeting(request):
     
     student = Student.objects.get(id=request.user.id)
@@ -56,6 +58,7 @@ def meeting(request):
 
 # ======================================== Assignments ====================================
 
+@login_required(login_url='signin')
 def assignments(request):
     
     student = Student.objects.get(id=request.user.id)
@@ -73,6 +76,7 @@ def assignments(request):
 
 # ======================================== Notes ========================================
 
+@login_required(login_url='signin')
 def notes(request):
     
     student = Student.objects.get(id=request.user.id)
@@ -90,6 +94,7 @@ def notes(request):
 
 # ======================================== Whats New ======================================
 
+@login_required(login_url='signin')
 def whatsnew(request):
     
     student = Student.objects.get(id=request.user.id)
@@ -106,27 +111,38 @@ def whatsnew(request):
     return render(request, "dashboard/whatsnew.html", parameters)
 
 
+@login_required(login_url='signin')
 def quiz(request):
     return render(request, "dashboard/quiz.html")
 
 
+@login_required(login_url='signin')
 def exampaper(request):
     return render(request, "dashboard/exampaper.html")
 
 
 
+@login_required(login_url='signin')
 def test(request):
     return render(request, "dashboard/test.html")
 
 
+@login_required(login_url='signin')
 def profile(request):
     student = Student.objects.get(id=request.user.id)
+    total_submissions = Submission.objects.filter(student=student).count()
 
-    return render(request, "dashboard/profile.html", {"student": student})
+    parameters = {
+        "student": student,
+        "total_submissions": total_submissions
+    }
+    
+    return render(request, "dashboard/profile.html", parameters)
 
 # ============================================== Edit Profile ==============================================
 
 
+@login_required(login_url='signin')
 def edit_profile(request):
 
     student = Student.objects.get(id=request.user.id)
@@ -148,6 +164,9 @@ def edit_profile(request):
         student.bio = request.POST.get("bio")
 
         student.save()
+        
+        messages.success(request, 'Profile Updated Successfully!')
+        
         return redirect("profile")
 
     return render(request, "dashboard/edit_profile.html", {"student": student})
@@ -155,6 +174,7 @@ def edit_profile(request):
 # ======================================== Update Profile Picture ==========================================
 
 
+@login_required(login_url='signin')
 def update_profile_pic(request):
     student = Student.objects.get(id=request.user.id)
 
@@ -174,6 +194,7 @@ def update_profile_pic(request):
 
 # ======================================== Update Banner Image ==========================================
 
+@login_required(login_url='signin')
 def update_banner_image(request):
      student = Student.objects.get(id=request.user.id)
 
@@ -187,8 +208,20 @@ def update_banner_image(request):
 
      return redirect('profile')
 
+# ============================================== Delete Account ==============================================
+
+@login_required(login_url='signin')
+def delete_account(request):
+    student = Student.objects.get(id=request.user.id)
+
+    student.delete()
+    auth.logout(request)
+
+    return redirect('home')
+
 # ============================================== Change Password ==============================================
 
+@login_required(login_url='signin')
 def change_password(request):
     student = Student.objects.get(id=request.user.id)
 
@@ -213,6 +246,7 @@ def change_password(request):
 # ============================================== Feedback ==============================================
 
 
+@login_required(login_url='signin')
 def feedback(request):
     student = Student.objects.get(username=request.user)
     if request.method == 'POST':
@@ -238,6 +272,7 @@ def feedback(request):
 
 # ============================================== Submit Assignment ==============================================
 
+@login_required(login_url='signin')
 def submit_assignment(request, assignment_id):
     student = Student.objects.get(id=request.user.id)
     assignment = Assignment.objects.get(id=assignment_id)

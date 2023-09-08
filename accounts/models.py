@@ -59,7 +59,7 @@ class Student(User):
     subjects = models.ManyToManyField(Subject, blank=True, null=True)
 
     profile_pic = models.ImageField(
-        upload_to="student_profile/", blank=True, null=True, default="/student_profile/default.jpg")
+        upload_to="student_profile/", blank=True, null=True, default="/student_profile/default.gif")
     
     banner_image = models.ImageField(
         upload_to="student_banner/", blank=True, null=True, default="/student_banner/default.jpg")

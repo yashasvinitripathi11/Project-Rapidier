@@ -1,7 +1,7 @@
 from django.shortcuts import render,redirect
 from django.contrib.auth.models import User
 from django.contrib import auth
-from .models import Student
+from .models import Student, Subject
 
 
 def signin(request):
@@ -27,22 +27,29 @@ def signup(request):
         last_name = request.POST.get("last_name")
         email=request.POST.get("email")
         password = request.POST.get("password")
+        subject = request.POST.get("subject")
 
 
         new_user = Student.objects.create(
             username=username,
             first_name=first_name,
             last_name = last_name,
-            email=email,
-           
+            email=email           
         )
+        
+        new_user.subjects.add(subject)
 
         new_user.set_password(password)
 
         new_user.save()
 
         return redirect("signin")
-    return render(request,"accounts/signup.html")
+    
+    parameters = {
+        "subjects": Subject.objects.all()
+    }
+    
+    return render(request,"accounts/signup.html", parameters)
 
 # =================================== logout ============================
 

@@ -24,6 +24,7 @@ urlpatterns = [
      path('update_profile_pic',views.update_profile_pic,name='update_profile_pic'),
      path('update_banner_image',views.update_banner_image,name='update_banner_image'),     
      path('change_password',views.change_password,name='change_password'),
+     path("delete_account", views.delete_account, name="delete_account"),
      
      path("submit_assignment/<int:assignment_id>", views.submit_assignment, name="submit_assignment"),
 ]
